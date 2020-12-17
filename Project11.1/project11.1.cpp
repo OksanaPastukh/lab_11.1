@@ -21,7 +21,7 @@ int max_value(char* fname)
 {
 	ifstream fout(fname); // відкрили перший файл для зчитування
 	int value = 0;
-	int max = 0;
+	int max = INT_MIN;
 	while (fout.read((char*)&value, sizeof(int))) // поки можна зчитувати
 	{
 		if (value > max) // якщо прочитаний символ менший
@@ -31,6 +31,21 @@ int max_value(char* fname)
 	}
 	return max;
 }
+int min_value(char* fname)
+{
+	ifstream fout(fname); // відкрили перший файл для зчитування
+	int value = 0;
+	int min = INT_MAX;
+	while (fout.read((char*)&value, sizeof(int))) // поки можна зчитувати
+	{
+		if (value < min) // якщо прочитаний символ менший
+		{
+			min = value; // - вважаємо його мінімальним
+		} // символів
+	}
+	return min;
+}
+
 
 int main()
 {
@@ -43,5 +58,6 @@ int main()
 	cout << "Введіть кількість  N: "; cin >> N;
 	CreateBIN(fname, N); // ввели рядки файлу з клавіатури
 	cout << "Maximal :" << max_value(fname) << endl;
+	cout << "Minimal :" << min_value(fname) << endl;
 	return 0;
 }
