@@ -26,8 +26,8 @@ void value(char* fname, char* gname)
 	int min = INT_MAX;
 	double middle_average_min_max;
 	double middle_average;
-	int sum = 0;
-	int n = 0;
+	double sum = 0;
+	double n = 0;
 	while (f.read((char*)&value, sizeof(int))) // поки можна зчитувати
 	{
 		if (value > max) // якщо прочитаний символ менший
@@ -42,7 +42,7 @@ void value(char* fname, char* gname)
 		n++;
 	}
 	 middle_average = sum / n;
-	 middle_average_min_max = (min + max) / 2;
+	 middle_average_min_max = ((double)min +(double)max) / 2;
 	 g.write((char*)&middle_average, sizeof(double));
 	 g.write((char*)&middle_average_min_max, sizeof(double));
 	 g.close();
@@ -54,7 +54,8 @@ void PrintBIN(char* gname) // виведення файлу на екран
 	double c; // прочитаний символ
 	while (fin.read((char*)&c, sizeof(c))) // поки можна прочитати символ
 	{
-		cout << c << endl; // виводимо його на екран
+		cout << "Середнье значення всіх компонентів" << c << endl  // виводимо його на екран
+			 << "Середнье значення мінімального і максимального значення" << c << endl;
 	}
 	cout << endl;
 }
@@ -65,11 +66,11 @@ int main()
 	SetConsoleOutputCP(1251); // встановлення сторінки win-cp1251 в потік виводу
 	char fname[100]; // ім'я першого файлу
 	char gname[100];
-	cout << "enter file name 1: "; cin >> fname;
+	cout << "Ім'я файлу з послідовністью чисел : "; cin >> fname;
 	int N;
 	cout << "Введіть кількість  N: "; cin >> N;
 	CreateBIN(fname, N); // ввели рядки файлу з клавіатури
-	cout << "enter file name 2: "; cin >> gname;
+	cout << "Ім'я файлу для збереження результату роботи : "; cin >> gname;
 	value(fname, gname);
 	PrintBIN(gname);
 	return 0;
