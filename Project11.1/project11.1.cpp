@@ -51,13 +51,12 @@ void value(char* fname, char* gname)
 void PrintBIN(char* gname) // виведення файлу на екран
 {
 	ifstream fin(gname, ios::binary); // відкрили файл для зчитування
-	double c; // прочитаний символ
-	while (fin.read((char*)&c, sizeof(c))) // поки можна прочитати символ
-	{
-		cout << "Середнье значення всіх компонентів" << c << endl  // виводимо його на екран
-			 << "Середнье значення мінімального і максимального значення" << c << endl;
-	}
-	cout << endl;
+	double middle_average; // прочитаний символ
+	fin.read((char*)&middle_average, sizeof(middle_average));
+	double middle_average_min_max;
+	fin.read((char*)&middle_average_min_max, sizeof(middle_average_min_max));
+    cout << "Середнье значення всіх компонентів  " << middle_average << endl  // виводимо його на екран
+		 << "Середнье значення мінімального і максимального значення  " << middle_average_min_max << endl;
 }
 int main()
 {
